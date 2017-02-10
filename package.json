@@ -1,0 +1,19 @@
+{
+  "name": "knob",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "install": "electron-rebuild"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "electron-rebuild": "^1.5.7"
+  },
+  "dependencies": {
+    "serialport": "^4.0.7"
+  }
+}

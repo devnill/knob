@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>THIS IS A THING!</title>
+  </head>
+  <body>
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    Electron <script>document.write(process.versions.electron)</script>,
+    and Serialport <script>document.write(require('serialport/package').version)</script>.
+
+    <div id="error"></div>
+    <div id="ports"></div>
+    <script>
+      require('./renderer.js')
+    </script>
