@@ -5,13 +5,22 @@
     <title>THIS IS A THING!</title>
   </head>
   <body>
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    Electron <script>document.write(process.versions.electron)</script>,
-    and Serialport <script>document.write(require('serialport/package').version)</script>.
-
-    <div id="error"></div>
-    <div id="ports"></div>
+    SARA IS A BUTT
+    
+    <div id='device-list'>
+      <h1>Detected Devices</h1>
+      <h2 class='status'>(status)</h2>
+      <ul class='devices'></ul>
+    </div>
+ 
+    <div id='device-output'>
+      <h1>Active Device</h1>
+      <div class='log'>(device log)</div>
+    </div>
+    <div id='device-input'>
+      <input class='terminal'/><a href='#'>Send</a>
+    </div>
+    
     <script>
       require('./renderer.js')
     </script>

@@ -1,35 +1,65 @@
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const path = require('path');
-const url = require('url');s
+const electron       = require('electron');
+const path           = require('path');
+const url            = require('url');
+const app            = electron.app; 
+const BrowserWindow  = electron.BrowserWindow;
 
-let mainWindow;
+const windows        = [];
+const windowDefaults = {
+  onLoad   : ()=>{},
+  onExit   : ()=>{},
+  width    : 600,
+  height   : 600,
+  url      : path.join(__dirname, 'index.html'), //todo sanitize?
+  protocol : 'file:',
+  slashes  : true,
+  _devTools: false
+};
 
 //todo replace onExit with more config
-function createWindow (onExit = ()=>{}) {
-  const window = new BrowserWindow({width: 600, height: 600});
+function createWindow (params = {}) {
+  params = Object.assign({}, windowDefaults, params); 
+
+  const window = new BrowserWindow({
+    width: params.width,
+    height:params.height
+  });
+  
   window.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
+    pathname : params.url,
+    protocol : params.protocol,
+    slashes  : params.slashes
   }));
-  //window.webContents.openDevTools();
-  window.on('closed', onExit);
+  
+  if(params._devTools === true){
+    window.webContents.openDevTools();
+  }
+  
+  window.on('closed', params.onExit);
+  params.onLoad(null, window);
+  return window;
 }
 
-app.on('ready', createWindow);
+app.on('ready', init);
 
-app.on('window-all-closed', function () {
- //do something with tray?
-});
+function init(){
 
+  app.on('window-all-closed', function () {
+    debugger;
+    //do something with tray?
+  });
 
-//when tray icon is clicked
-app.on('activate', function () {
-  if (mainWindow === null) {
-    mainWindow = createWindow(()=>{
-      mainWindow = null;
-    });
-  }
-});
+  //when tray icon is clicked
+  app.on('activate', function () {
+    debugger;
+    if (windows.length === null) {
+      //createWindow(()=>{
+      //  mainWindow = null;
+      //});
+    }
+  });
+
+  windows.push(createWindow({
+    _devTools: true
+  }));  
+}
